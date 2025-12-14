@@ -6,18 +6,7 @@ export default [
    */
   {
     path: '/',
-    redirect: '/home'
-  },
-  /**
-   * 主页
-   */
-  {
-    path: '/home',
-    name: 'home',
-    component: () => import('@/views/home/HomeView.vue'),
-    meta: {
-      layoutComponent: DefaultLayout
-    }
+    redirect: '/tool'
   },
   /**
    * 测试页
@@ -28,6 +17,17 @@ export default [
     component: () => import('@/views/test/TestView.vue'),
     meta: {
       layoutComponent: BlankLayout
+    }
+  },
+  /**
+   * 工具页
+   */
+  {
+    path: '/tool',
+    name: 'tool',
+    component: () => import('@/views/tool/ToolView.vue'),
+    meta: {
+      layoutComponent: DefaultLayout
     }
   },
   /**

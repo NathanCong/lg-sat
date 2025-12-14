@@ -1,21 +1,18 @@
-import { get } from '@/utils/request'
+import OpenAI from 'openai'
 
-export function getHolidaysFromYear(year: string) {
-  /**
-   * API 官网：https://github.com/NateScarlet/holiday-cn
-   */
-  return get(
-    `https://cdn.jsdelivr.net/gh/NateScarlet/holiday-cn@master/${year}.json`
-  )
-}
+const openai = new OpenAI({
+  apiKey: import.meta.env.VITE_API_KEY,
+  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1'
+})
 
-/**
- * 批量查询指定日期节假日信息
- */
-export function getHolidaysFromDates(dates: string[]) {
-  /**
-   * API 官网：https://timor.tech/api/holiday/
-   */
-  const dateParams = dates.map((date) => `d=${date}`).join('&')
-  return get(`http://timor.tech/api/holiday/batch?${dateParams}`)
+export function qwen(contents: string[]) {
+  return new Promise((resolve, reject) => {
+    openai.chat.completions
+      .create({
+        model: 'qwen-plus',
+        messages: contents.map((i) => ({ role: 'user', content: i }))
+      })
+      .then((res) => resolve(res))
+      .catch((err) => reject(err))
+  })
 }

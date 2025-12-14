@@ -33,7 +33,7 @@ export default defineConfig({
   // 服务配置
   server: {
     host: '0.0.0.0',
-    port: 4000,
+    port: 4001,
     open: true, // 启动时自动打开浏览器
     hmr: true
   },
