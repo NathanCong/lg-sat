@@ -1,0 +1,9 @@
+services:
+  lg-sat:
+    build: .
+    image: lg-sat:latest
+    container_name: lg-sat
+    restart: unless-stopped
+    ports:
+      - 4001:80
+    command: ['nginx', '-g', 'daemon off;']
