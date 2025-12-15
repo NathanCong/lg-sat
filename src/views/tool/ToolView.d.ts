@@ -1,3 +1,14 @@
+/**
+ * 用户问题
+ */
+interface UserQuestion {
+  question: string // 问题内容
+  options?: string[] // 问题选项
+}
+
+/**
+ * 根据用户问题生成的数据（用于统计）
+ */
 interface Question {
   index: number // 问题序号
   content: string // 问题内容
@@ -5,25 +16,9 @@ interface Question {
   options?: Array<{
     label: string
     value: string
-    count?: number
-    total?: number
+    count: number
+    other?: string
   }>
+  answers?: string[]
+  analysis?: string
 }
-
-interface UserAnswer {
-  questionIndex: number // 问题序号
-  answer: string // 答案
-  others?: string // 补充答案（TextBox 内容）
-}
-
-interface StatisticalResult {
-  userInfo: Record<string, string> // 用户信息
-  userAnswers: UserAnswer[] // 用户答案
-}
-
-// interface AnalysisResult {
-//   questionIndex: number // 问题序号
-//   questionContent: string // 问题内容
-//   questionType: string // 问题类型
-
-// }
