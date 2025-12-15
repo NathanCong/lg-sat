@@ -27,6 +27,7 @@ declare module 'vue' {
     ASpin: typeof import('ant-design-vue/es')['Spin']
     ATable: typeof import('ant-design-vue/es')['Table']
     ATextarea: typeof import('ant-design-vue/es')['Textarea']
+    AUpload: typeof import('ant-design-vue/es')['Upload']
     CommonCard: typeof import('./../components/CommonCard.vue')['default']
     CommonEmpty: typeof import('./../components/CommonEmpty.vue')['default']
     CommonForm: typeof import('./../components/CommonForm.vue')['default']

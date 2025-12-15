@@ -1,21 +1,14 @@
-import { get } from '@/utils/request'
+import { post } from '@/utils/request'
 
-export function getHolidaysFromYear(year: string) {
-  /**
-   * API 官网：https://github.com/NateScarlet/holiday-cn
-   */
-  return get(
-    `https://cdn.jsdelivr.net/gh/NateScarlet/holiday-cn@master/${year}.json`
+export function qwen(contents: string[]) {
+  return post(
+    'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
+    {
+      model: 'qwen-plus',
+      messages: contents.map((content) => ({ role: 'user', content }))
+    },
+    {
+      Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`
+    }
   )
-}
-
-/**
- * 批量查询指定日期节假日信息
- */
-export function getHolidaysFromDates(dates: string[]) {
-  /**
-   * API 官网：https://timor.tech/api/holiday/
-   */
-  const dateParams = dates.map((date) => `d=${date}`).join('&')
-  return get(`http://timor.tech/api/holiday/batch?${dateParams}`)
 }

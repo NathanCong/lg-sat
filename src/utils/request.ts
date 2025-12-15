@@ -8,15 +8,19 @@ import type {
 import { notification } from 'ant-design-vue'
 
 /**
- * 创建axios实例
+ * 创建公共 headers
+ */
+const commonHeaders = {
+  'Content-Type': 'application/json',
+  Accept: 'application/json'
+}
+
+/**
+ * 创建 axios 实例
  */
 const request: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
-  timeout: 1000 * 100,
-  headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json'
-  }
+  timeout: 1000 * 100
 })
 
 /**
@@ -65,13 +69,21 @@ request.interceptors.response.use(
 /**
  * GET 请求
  */
-export function get(url: string, params?: unknown) {
-  return request.get(url, { params })
+export function get(
+  url: string,
+  params?: unknown,
+  headers?: Record<string, string>
+) {
+  return request.get(url, { params, headers: { ...commonHeaders, ...headers } })
 }
 
 /**
  * POST 请求
  */
-export function post(url: string, data?: unknown) {
-  return request.post(url, data)
+export function post(
+  url: string,
+  data?: unknown,
+  headers?: Record<string, string>
+) {
+  return request.post(url, data, { headers: { ...commonHeaders, ...headers } })
 }
