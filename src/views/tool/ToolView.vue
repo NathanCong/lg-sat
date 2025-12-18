@@ -65,6 +65,29 @@
                         </strong>
                       </span>
                     </template>
+                    <p class="result-charts">
+                      <span class="chart-pie">
+                        <PieChart
+                          :data="
+                            q.options?.map((i) => ({
+                              label: i.label,
+                              count: i.count,
+                              percent: Number(
+                                ((i.count / total) * 100).toFixed(0)
+                              )
+                            }))
+                          "
+                        />
+                      </span>
+                      <span class="chart-bar">
+                        <BarChart
+                          x-key="选项"
+                          :x-values="q.options?.map((i) => i.label)"
+                          y-key="人数"
+                          :y-values="q.options?.map((i) => i.count)"
+                        />
+                      </span>
+                    </p>
                   </template>
                 </p>
               </section>
@@ -100,6 +123,8 @@ import * as xlsx from 'xlsx'
 import { computed, ref, watch } from 'vue'
 import { CommonCard, CommonEmpty, CommonLoading } from '@/components/index'
 import MarkdownRender from './MarkdownRender.vue'
+import BarChart from './BarChart.vue'
+import PieChart from './PieChart.vue'
 import { qwen } from '@/apis/index'
 import { USER_QUESTIONS } from './constants/index'
 
@@ -341,6 +366,23 @@ async function onAnalysis() {
             &.blue {
               color: blue;
             }
+          }
+        }
+
+        .result-charts {
+          width: 100%;
+          height: 400px;
+          display: flex;
+          flex-direction: row;
+
+          .chart-pie {
+            flex: 1;
+            // background-color: #ccc;
+          }
+
+          .chart-bar {
+            flex: 1;
+            // background-color: #ddd;
           }
         }
       }
